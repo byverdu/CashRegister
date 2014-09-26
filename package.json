@@ -1,0 +1,13 @@
+{
+  "name": "CashRegister",
+  "version": "0.0.1",
+  "private": true,
+  "author": "Byverdu@gmail.com",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4"
+  }
+}
