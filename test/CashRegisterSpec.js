@@ -7,6 +7,7 @@ var product;
 
 beforeEach(function() {
   cashRegister = new CashRegister();
+  product      = new Product('rice',3.5,1);
 })
 
 describe('CashRegister', function() {
@@ -14,26 +15,32 @@ describe('CashRegister', function() {
 	describe('Counting products', function() {
 		
 		it('starts with 0 products', function() {
-			expect(cashRegister.count).to.equal(null);
+			expect(cashRegister.BASKET).to.have.length(0);
 		});
 
 		it('can accept products', function() {
-			expect(cashRegister.count).to.equal(null);
+			cashRegister.processOrder(product);
 
-			cashRegister.processOrder('rice',3.5,2);
-
-			expect(cashRegister.count).to.equal(1);
+			expect(cashRegister.BASKET).to.have.length(1)
 		});
 
-		xit('can accept more than one products', function() {
-			expect(cashRegister.count).to.equal(null);
+		// it('can accept products', function() {
+		// 	expect(cashRegister.count).to.equal(null);
 
-			cashRegister.processOrder('rice');
-			cashRegister.processOrder('oil');
-			cashRegister.processOrder('battery');
+		// 	cashRegister.processOrder('rice',3.5,2);
 
-			expect(cashRegister.count).to.equal(3);
-		});
+		// 	expect(cashRegister.count).to.equal(1);
+		// });
+
+		// xit('can accept more than one products', function() {
+		// 	expect(cashRegister.count).to.equal(null);
+
+		// 	cashRegister.processOrder('rice');
+		// 	cashRegister.processOrder('oil');
+		// 	cashRegister.processOrder('battery');
+
+		// 	expect(cashRegister.count).to.equal(3);
+		// });
 		
 	});
 
