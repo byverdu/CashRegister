@@ -1,3 +1,6 @@
+// force the test environment to 'test'
+process.env.NODE_ENV = 'test';
+
 var expect       = require('chai').expect;
 var Product      = require('../lib/Product');    
 var CashRegister = require('../lib/CashRegister');
@@ -40,6 +43,12 @@ describe('CashRegister', function() {
 	});
 
 	describe('Manipulating the basket', function() {
+
+		it('searching by name', function() {
+       adding_two_products();
+
+       expect(cashRegister.search_by_name('rice')).to.eql({name:'rice',price:3.5,quantity:1})
+		});	
 
 		describe('For the total amount of', function() {
 			
