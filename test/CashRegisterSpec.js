@@ -76,8 +76,17 @@ describe('CashRegister', function() {
 			cashRegister.acceptProd(rice);
 			cashRegister.delete_last();
 
-			expect(cashRegister.total_products).to.equal(0)
+			expect(cashRegister.total_products).to.equal(0);
+		});
 
+		it('can delete a product by name', function() {
+			cashRegister.acceptProd(rice);
+			cashRegister.acceptProd(beans);
+
+			cashRegister.delete_by_name('rice');
+
+			expect(cashRegister.total_products).to.equal(1);
+			expect(cashRegister.basket).to.contain({name:'beans',price:1.25,quantity:2});
 		});
 	});
 
