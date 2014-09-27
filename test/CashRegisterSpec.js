@@ -111,7 +111,7 @@ describe('CashRegister', function() {
 				expect(cashRegister.total_price).to.equal(2.5)
 			});
 
-			it('for two product', function() {
+			it('for two products', function() {
 				var bread = new Product('bread',0.5,1);
 
 				cashRegister.acceptProd(rice);
@@ -122,7 +122,7 @@ describe('CashRegister', function() {
 				expect(cashRegister.total_price).to.equal(4)
 			});
 
-			it('for two product with different quantities', function() {
+			it('for two products with different quantities', function() {
 
 				adding_two_products();
 
@@ -131,25 +131,28 @@ describe('CashRegister', function() {
 				expect(cashRegister.total_price).to.equal(6)
 			});
 
-			it('recalculates the price if a product is deleted', function() {
-				adding_two_products();
+			describe('Recalculates the price if a product is deleted', function() {
+				
+				it('the last one added', function() {
+					adding_two_products();
 
-				cashRegister.total_price = 6;
+					cashRegister.total_price = 6;
 
-				cashRegister.delete_last()
+					cashRegister.delete_last()
 
-				expect(cashRegister.total_price).to.equal(3.5)
-	    });
+					expect(cashRegister.total_price).to.equal(3.5)
+		    });
 
-			it('recalculates the price if a product is deleted', function() {
-				adding_two_products();
+				it('by querying a name', function() {
+					adding_two_products();
 
-				cashRegister.total_price = 6;
+					cashRegister.total_price = 6;
 
-				cashRegister.delete_by_name('rice');
+					cashRegister.delete_by_name('rice');
 
-				expect(cashRegister.total_price).to.equal(2.5);
-	    });
+					expect(cashRegister.total_price).to.equal(2.5);
+		    });
+			});
 		});
 	});
 });
