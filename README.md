@@ -54,12 +54,13 @@ cashRegister.total_price = 0;
 cashRegister.accept_prod(product);
 
 // deleting cashRegister.basket elements
-
 cashRegister.delete_last();
 cashRegister.delete_by_name('name');
 
-// getting the total price
+// searching cashRegister.basket elements
+cashRegister.search_by_name('name')
 
+// getting the total price
 cashRegister.process_order();
 ```
 
