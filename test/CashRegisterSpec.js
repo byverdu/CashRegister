@@ -12,7 +12,27 @@ describe('CashRegister', function() {
 	describe('Counting products', function() {
 		
 		it('starts with 0 products', function() {
-			expect(cashRegister.count).to.equal(0)
+			expect(cashRegister.count).to.equal(null);
 		});
+
+		it('can accept products', function() {
+			expect(cashRegister.count).to.equal(null);
+
+			cashRegister.processOrder('rice');
+
+			expect(cashRegister.count).to.equal(1);
+		});
+
+		it('can accept more than one products', function() {
+			expect(cashRegister.count).to.equal(null);
+
+			cashRegister.processOrder('rice');
+			cashRegister.processOrder('oil');
+			cashRegister.processOrder('battery');
+
+			expect(cashRegister.count).to.equal(3);
+		});
+
 	});
+
 });
