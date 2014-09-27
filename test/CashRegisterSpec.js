@@ -32,7 +32,12 @@ describe('CashRegister', function() {
 
 			expect(cashRegister.count).to.equal(3);
 		});
-
+		
 	});
 
+		it('Knows that they have a price', function() {
+
+			expect(cashRegister.processOrder('rice',3.5)).to.deep.include.members([{item:'rice',price: 3.5}])	
+			
+		});
 });
