@@ -36,59 +36,66 @@ describe('CashRegister', function() {
 	});
 
 	describe('Manipulating the basket', function() {
-		
-		it('knows the total amount for one product', function() {
+
+		describe('For the total amount for', function() {
 			
-			cashRegister.acceptProd(rice);
+			it('one product', function() {
+				
+				cashRegister.acceptProd(rice);
 
-			expect(cashRegister.basket).to.have.length(1);
-			expect(cashRegister.total_products).to.equal(1)
+				expect(cashRegister.basket).to.have.length(1);
+				expect(cashRegister.total_products).to.equal(1)
 
+			});
+
+			it('two products', function() {
+				
+				cashRegister.acceptProd(rice);
+				cashRegister.acceptProd(beans);
+
+				expect(cashRegister.total_products).to.equal(2)
+			});
 		});
 
-		it('knows the total amount for two products', function() {
+		describe('For the total quantity if there is', function() {
 			
-			cashRegister.acceptProd(rice);
-			cashRegister.acceptProd(beans);
+			it('only one product', function() {
+				
+				cashRegister.acceptProd(rice);
 
-			expect(cashRegister.total_products).to.equal(2)
+				expect(cashRegister.total_quantity).to.equal(1)
+			});
+
+			it('more than one product', function() {
+
+				cashRegister.total_quantity = 0;
+				
+				cashRegister.acceptProd(rice);
+				cashRegister.acceptProd(beans);
+
+				expect(cashRegister.total_quantity).to.equal(3)
+			});
 		});
 
-		it('knows the total quantity if there is only one product', function() {
+		describe('Deleting items', function() {
 			
-			cashRegister.acceptProd(rice);
+			it('the last one added', function() {
+				
+				cashRegister.acceptProd(rice);
+				cashRegister.delete_last();
 
-			expect(cashRegister.total_quantity).to.equal(1)
-		});
+				expect(cashRegister.total_products).to.equal(0);
+			});
 
-		it('knows the total quantity if there is more than one product', function() {
+			it('by querying a product name', function() {
+				cashRegister.acceptProd(rice);
+				cashRegister.acceptProd(beans);
 
-			cashRegister.total_quantity = 0;
-			
-			cashRegister.acceptProd(rice);
-			cashRegister.acceptProd(beans);
+				cashRegister.delete_by_name('rice');
 
-			expect(cashRegister.total_quantity).to.equal(3)
-		});
-
-		it('can delete the last added item', function() {
-			
-			cashRegister.acceptProd(rice);
-			cashRegister.delete_last();
-
-			expect(cashRegister.total_products).to.equal(0);
-		});
-
-		it('can delete a product by name', function() {
-			cashRegister.acceptProd(rice);
-			cashRegister.acceptProd(beans);
-
-			cashRegister.delete_by_name('rice');
-
-			expect(cashRegister.total_products).to.equal(1);
-			expect(cashRegister.basket).to.contain({name:'beans',price:1.25,quantity:2});
+				expect(cashRegister.total_products).to.equal(1);
+				expect(cashRegister.basket).to.contain({name:'beans',price:1.25,quantity:2});
+			});
 		});
 	});
-
-
 });
