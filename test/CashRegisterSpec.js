@@ -70,6 +70,15 @@ describe('CashRegister', function() {
 
 			expect(cashRegister.total_quantity).to.equal(3)
 		});
+
+		it('can delete the last added item', function() {
+			
+			cashRegister.acceptProd(rice);
+			cashRegister.delete_last();
+
+			expect(cashRegister.total_products).to.equal(0)
+
+		});
 	});
 
 
