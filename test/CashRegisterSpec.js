@@ -3,12 +3,12 @@ var Product      = require('../lib/Product');
 var CashRegister = require('../lib/CashRegister');
 
 var cashRegister;
-var product;
+var rice,beans;
 
 beforeEach(function() {
   cashRegister = new CashRegister();
-  product      = new Product('rice',3.5,1);
-  product_1    = new Product('beans',1.25,2)
+  rice         = new Product('rice' ,3.5,1);
+  beans        = new Product('beans',1.25,2)
 })
 
 describe('CashRegister', function() {
@@ -20,7 +20,7 @@ describe('CashRegister', function() {
 		});
 
 		it('can accept products', function() {
-			cashRegister.acceptProd(product);
+			cashRegister.acceptProd(rice);
 
 			expect(cashRegister.basket).to.have.length(1);
 		});
@@ -28,8 +28,8 @@ describe('CashRegister', function() {
 		it('can accept more than one product', function() {
 			cashRegister.basket.length = 0; 
 
-			cashRegister.acceptProd(product);
-			cashRegister.acceptProd(product_1);
+			cashRegister.acceptProd(rice);
+			cashRegister.acceptProd(beans);
 
 			expect(cashRegister.basket).to.have.length(2);
 		});
@@ -39,24 +39,36 @@ describe('CashRegister', function() {
 		
 		it('knows the total amount for one product', function() {
 			
-			cashRegister.acceptProd(product);
+			cashRegister.acceptProd(rice);
 
 			expect(cashRegister.basket).to.have.length(1);
-			expect(cashRegister.totalProducts).to.equal(1)
+			expect(cashRegister.total_products).to.equal(1)
 
 		});
 
 		it('knows the total amount for two products', function() {
 			
-			cashRegister.acceptProd(product);
-			cashRegister.acceptProd(product_1);
+			cashRegister.acceptProd(rice);
+			cashRegister.acceptProd(beans);
 
-			expect(cashRegister.totalProducts).to.equal(2)
+			expect(cashRegister.total_products).to.equal(2)
 		});
 
-		it('knows the total quantity of products', function() {
+		it('knows the total quantity if there is only one product', function() {
 			
+			cashRegister.acceptProd(rice);
 
+			expect(cashRegister.total_quantity).to.equal(1)
+		});
+
+		it('knows the total quantity if there is more than one product', function() {
+
+			cashRegister.total_quantity = 0;
+			
+			cashRegister.acceptProd(rice);
+			cashRegister.acceptProd(beans);
+
+			expect(cashRegister.total_quantity).to.equal(3)
 		});
 	});
 
