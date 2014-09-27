@@ -15,6 +15,8 @@ The main functionality are creating products, adding them to the cash register, 
 ## How to run the tests
 
 `javascript
+
 cd /path/to/folder
 
-mocha`
+mocha
+`
