@@ -1,15 +1,36 @@
 var expect  = require('chai').expect;
 var Product = require('../lib/Product');
 
-describe('Product', function() {
-	
-	it('is initialize with a name and price', function() {
-	  
-	  var product = new Product('rice',3.5,2);
+var product; 
 
-	  expect(product.name).to.equal('rice');	
-	  expect(product.price).to.equal(3.5);	
-	  expect(product.quantity).to.equal(2);	
+describe('Product', function() {
+
+	
+	describe('constructor', function() {
+	  
+	  it('should have a default name', function() {
+      
+      var product = new Product('rice');
+	    
+	    expect(product.name).to.be.a('string');	
+	    expect(product.name).to.equal('rice');	
+	  });
+
+	  it('should have a default price', function() {
+      
+      var product = new Product('rice',3.5);
+
+	    expect(product.price).to.be.a('number');	
+	    expect(product.price).to.equal(3.5);	
+	 	});
+
+	  it('should have a default quantity', function() {
+
+	  	var product = new Product('rice',3.5,1);
+	  	
+	  	expect(product.quantity).to.be.a('number');
+	  	expect(product.quantity).to.equal(1);
+	  });
 
 	});	
 
