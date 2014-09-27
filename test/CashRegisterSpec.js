@@ -12,8 +12,8 @@ beforeEach(function() {
 })
 
 function adding_two_products(){
-	cashRegister.acceptProd(rice);
-	cashRegister.acceptProd(beans);
+	cashRegister.accept_prod(rice);
+	cashRegister.accept_prod(beans);
 }
 
 describe('CashRegister', function() {
@@ -25,7 +25,7 @@ describe('CashRegister', function() {
 		});
 
 		it('can accept products', function() {
-			cashRegister.acceptProd(rice);
+			cashRegister.accept_prod(rice);
 
 			expect(cashRegister.basket).to.have.length(1);
 		});
@@ -44,7 +44,7 @@ describe('CashRegister', function() {
 		describe('For the total amount of', function() {
 			
 			it('one product', function() {
-				cashRegister.acceptProd(rice);
+				cashRegister.accept_prod(rice);
 
 				expect(cashRegister.basket).to.have.length(1);
 				expect(cashRegister.total_products).to.equal(1)
@@ -60,7 +60,7 @@ describe('CashRegister', function() {
 		describe('For the total quantity if there is', function() {
 			
 			it('only one product', function() {
-				cashRegister.acceptProd(rice);
+				cashRegister.accept_prod(rice);
 
 				expect(cashRegister.total_quantity).to.equal(1)
 			});
@@ -77,7 +77,7 @@ describe('CashRegister', function() {
 		describe('Deleting items', function() {
 			
 			it('the last one added', function() {
-				cashRegister.acceptProd(rice);
+				cashRegister.accept_prod(rice);
 				cashRegister.delete_last();
 
 				expect(cashRegister.total_products).to.equal(0);
@@ -96,17 +96,17 @@ describe('CashRegister', function() {
 		describe('Getting the price', function() {
 			
 			it('for only one product', function() {
-				cashRegister.acceptProd(rice);
+				cashRegister.accept_prod(rice);
 
-	      cashRegister.processOrder();
+	      cashRegister.process_order();
 
 	      expect(cashRegister.total_price).to.equal(3.5)
 			});
 
 			it('for one product with a quantity of 2', function() {
-				cashRegister.acceptProd(beans);
+				cashRegister.accept_prod(beans);
 
-				cashRegister.processOrder();
+				cashRegister.process_order();
 
 				expect(cashRegister.total_price).to.equal(2.5)
 			});
@@ -114,10 +114,10 @@ describe('CashRegister', function() {
 			it('for two products', function() {
 				var bread = new Product('bread',0.5,1);
 
-				cashRegister.acceptProd(rice);
-				cashRegister.acceptProd(bread);
+				cashRegister.accept_prod(rice);
+				cashRegister.accept_prod(bread);
 
-				cashRegister.processOrder();
+				cashRegister.process_order();
 
 				expect(cashRegister.total_price).to.equal(4)
 			});
@@ -126,7 +126,7 @@ describe('CashRegister', function() {
 
 				adding_two_products();
 
-				cashRegister.processOrder();
+				cashRegister.process_order();
 
 				expect(cashRegister.total_price).to.equal(6)
 			});
