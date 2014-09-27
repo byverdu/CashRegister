@@ -11,6 +11,11 @@ beforeEach(function() {
   beans        = new Product('beans',1.25,2)
 })
 
+function adding_two_products(){
+	cashRegister.acceptProd(rice);
+	cashRegister.acceptProd(beans);
+}
+
 describe('CashRegister', function() {
 
 	describe('Counting products', function() {
@@ -28,8 +33,7 @@ describe('CashRegister', function() {
 		it('can accept more than one product', function() {
 			cashRegister.basket.length = 0; 
 
-			cashRegister.acceptProd(rice);
-			cashRegister.acceptProd(beans);
+			adding_two_products();
 
 			expect(cashRegister.basket).to.have.length(2);
 		});
@@ -47,8 +51,7 @@ describe('CashRegister', function() {
 			});
 
 			it('two products', function() {
-				cashRegister.acceptProd(rice);
-				cashRegister.acceptProd(beans);
+				adding_two_products();
 
 				expect(cashRegister.total_products).to.equal(2)
 			});
@@ -65,8 +68,7 @@ describe('CashRegister', function() {
 			it('more than one product', function() {
 				cashRegister.total_quantity = 0;
 				
-				cashRegister.acceptProd(rice);
-				cashRegister.acceptProd(beans);
+				adding_two_products();
 
 				expect(cashRegister.total_quantity).to.equal(3)
 			});
@@ -82,8 +84,7 @@ describe('CashRegister', function() {
 			});
 
 			it('by querying a product name', function() {
-				cashRegister.acceptProd(rice);
-				cashRegister.acceptProd(beans);
+				adding_two_products();
 
 				cashRegister.delete_by_name('rice');
 
@@ -123,12 +124,22 @@ describe('CashRegister', function() {
 
 		it('for two product with different quantities', function() {
 
-			cashRegister.acceptProd(rice);
-			cashRegister.acceptProd(beans);
+			adding_two_products();
 
 			cashRegister.processOrder();
 
 			expect(cashRegister.total_price).to.equal(6)
+		});
+
+		it('recalculates the price if a product is deleted', function() {
+			adding_two_products();
+
+			cashRegister.total_price = 6;
+
+			cashRegister.delete_last()
+
+			expect(cashRegister.total_price).to.equal(3.5)
+
 		});
 	});
 	});
