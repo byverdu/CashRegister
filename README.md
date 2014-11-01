@@ -12,7 +12,7 @@ The main functionality are creating products, adding them to the cash register, 
 3. Chai
 4. Git
 i
-### How to run the tests
+### How to run the tests.
 
 ```javascript
 
@@ -21,7 +21,7 @@ cd /path/to/folder
 mocha
 ```
 
-### How to run the app
+### How to run the app.
 
 ```javascript
 cd /path/to/folder
